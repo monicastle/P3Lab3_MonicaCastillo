@@ -1,10 +1,17 @@
+#ifndef LIBRO_H
+#define LIBRO_H
 #include <string>
 class Libro {
     string titulo, autor;
-    int año;
+    int ano;
 public:
-    Libro(string titulo_l, string autor_l = "", int año_l = 0)
-        : titulo(titulo_l), autor(autor_l), año(año_l) {}
+    Libro{
+    } // Fin Constructor Libro
+    Libro(string titulo_l = "", string autor_l = "", int ano_l = 0) {
+        titulo = titulo_l;
+        autor = autor_l;
+        ano = ano_l;
+    } // Fin Constructor Libro
     string getTitulo() const {
         return titulo;
     } // Fin Get Nombre
@@ -17,10 +24,13 @@ public:
     void setAutor(string autor_l) {
         autor = autor_l;
     } // Fin Set Ubicacion
-    string getAño() const {
-        return año;
+    string getAno() const {
+        return ano;
     } // Fin Get Año
-    void setAño(int año_l) {
-        año = año_l;
+    void setAno(int ano_l) {
+        ano = ano_l;
     } // Fin Set Año
+    ~Libro(){
+    } // Fin Destructor Libro
 }; // Fin Class Libro
+#endif

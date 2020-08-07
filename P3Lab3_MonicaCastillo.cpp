@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-//#include "Biblioteca.hpp"
-//#include "Catalogo.hpp"
-//#include "Libro.hpp"
+#include "Biblioteca.hpp"
 using namespace std;
 int main() {
     char respuesta = 's';
@@ -16,8 +14,8 @@ int main() {
         cout << "6. Salida" << endl;
         cout << "Ingrese una opcion: ";
         cin >> opcion;
-        switch (opcion){  
-        case 1: { 
+        switch (opcion) {
+        case 1: {
             string nombre = "";
             cout << "Ingrese el nombre de la biblioteca: ";
             getline(cin, nombre);
@@ -30,14 +28,32 @@ int main() {
             cin >> numpisos;
             int numestantes;
             cout << "Ingrese el numero de estantes de la biblioteca: ";
-            cin >> numestantes;   
+            cin >> numestantes;
             int numsecciones;
             cout << "Ingrese el numero de secciones de la biblioteca: ";
             cin >> numsecciones;
-            cout << "Biblioteca creada con existo!" << endl;                 
+            Biblioteca b(nombre, ubicacion, numpisos, numestantes, numsecciones);
+            
+            cout << "Biblioteca creada con existo!" << endl;
             break; }
         case 2: {
-            break; } 
+            string nombre = "";
+            cout << "Ingrese el nombre del libro: ";
+            getline(cin, nombre);
+            getline(cin, nombre);
+            string autor = "";
+            cout << "Ingrese el autor del libro: ";
+            getline(cin, autor);
+            int ano;
+            cout << "Ingrese el ano del libro: ";
+            cin >> ano;
+
+            for (int i = 0; i < lista_bibliotecas; i++){
+                cout << i << "." << lista_bibliotecas[i] << endl;
+            } // Fin For    
+
+            cout << "Libro agregado con existo!" << endl;
+            break; }
         case 3: {
             break; }
         case 4: {
@@ -48,7 +64,7 @@ int main() {
             // Aqui va la Salida
             respuesta = 'n';
             break; }
-        default: 
+        default:
             cout << "¡Entrada no valida!";
         } // Fin Switch
     } // Fin While Respuesta
