@@ -1,20 +1,18 @@
-#ifndef BIBLIOTECA_H
-#define BIBLIOTECA_H
 #include <string>
-#include <vector>
-#include "Catalago.hpp"
+#include "Catalogo.hpp"
+using namespace std;
 class Biblioteca {
     string nombre, ubicacion;
-    Catalogo*** bibliotecas;
+    Catalogo****bibliotecas;
 public:
     Biblioteca() {
     } // Fin Constructor Biblioteca
-    Biblioteca(string nomb = "", string ubic = "", int npisos = 0, int nestantes = 0, int nsecciones = 0) {
+    Biblioteca(string nomb, string ubic, int npisos, int nestantes, int nsecciones) {
         nombre = nomb;
         ubicacion = ubic;
-        bibliotecas = new Catalago ***[npisos];
+        bibliotecas = new Catalogo ***[npisos];
         for (int i = 0; i < npisos; i++) {
-            bibliotecas[i] = new Catalago**[nestantes];
+            bibliotecas[i] = new Catalogo**[nestantes];
             for (int j = 0; j < nestantes; j++) {
                 bibliotecas[i][j] = new Catalogo*[nsecciones];
                 for (int k = 0; k < nsecciones; k++) {
@@ -33,8 +31,14 @@ public:
         return ubicacion;
     } // Fin Get Ubicacion
     void setUbicacion(string ubic) {
-        ubicacion = ubc;
+        ubicacion = ubic;
     } // Fin Set Ubicacion
+    void agregarLibro(string titulo, string autor, int ano, int npisos, int nestantes, int nsecciones) {
+        bibliotecas[npisos][nestantes][nsecciones]->setLibro(titulo, autor, ano);
+    } // Agregar Libro
+    /*Catalogo BuscarLibros(int npisos, int nestantes, int nsecciones) {
+        return bibliotecas[npisos][nestantes][nsecciones];
+    } // Agregar Libro*/
     ~Biblioteca() {
 
     } // Fin Destructor Biblioteca
@@ -42,4 +46,3 @@ public:
         return "" + nombre;
     } // Fin To String
 }; // Fin Class Biblioteca 
-#endif
