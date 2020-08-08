@@ -7,8 +7,8 @@ class Catalogo {
 public:
     Catalogo() {
     } // Fin Constructor Catalogo
-    Libro* getLibro(int posicion) const {
-        return libros[posicion];
+    vector<Libro*> getLibro() {
+        return libros;
     } // Fin Get Libro
     void setLibro(string titulo, string autor, int ano) {
         libros.push_back(new Libro(titulo, autor, ano));
@@ -17,7 +17,7 @@ public:
     } // Fin Destructor Catalogo
     string toString() {
         string acum = "";
-        for (int i = 0; i < libros.size(); i++){
+        for (int i = 0; i < libros.size(); i++) {
             acum += libros[i]->toString() + " ";
         } // Fin For     
         return "" + acum;

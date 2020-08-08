@@ -32,6 +32,5 @@ public:
     string toString() {
         return "" + titulo;
     } // Fin To String
-    ~Libro(){ 
-    } // Fin Destructor Libro
+    ~Libro(){       } // Fin Destructor Libro
 }; // Fin Class Libro

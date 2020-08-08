@@ -5,7 +5,7 @@
 using namespace std;
 int main() {
     char respuesta = 's';
-    vector<Biblioteca> bibliotecas;
+    vector<Biblioteca*> bibliotecas;
     while (respuesta == 's') {
         int opcion;
         cout << "1. Crear Biblioteca" << endl;
@@ -29,7 +29,7 @@ int main() {
             cout << "Ingrese el numero de pisos de la biblioteca: ";
             cin >> numpisos;
             while (numpisos <= 0) {
-                cout << "El numero ingresado no es valido!";
+                cout << "El numero ingresado no es valido!" << endl;
                 cout << "Ingrese el numero de pisos de la biblioteca: ";
                 cin >> numpisos;
             } // Fin While Validacion  
@@ -37,7 +37,7 @@ int main() {
             cout << "Ingrese el numero de estantes de la biblioteca: ";
             cin >> numestantes;
             while (numestantes <= 0) {
-                cout << "El numero ingresado no es valido!";
+                cout << "El numero ingresado no es valido!" << endl;
                 cout << "Ingrese el numero de estantes de la biblioteca: ";
                 cin >> numestantes;
             } // Fin While Validacion  
@@ -45,12 +45,11 @@ int main() {
             cout << "Ingrese el numero de secciones de la biblioteca: ";
             cin >> numsecciones;
             while (numsecciones <= 0) {
-                cout << "El numero ingresado no es valido!";
+                cout << "El numero ingresado no es valido!" << endl;
                 cout << "Ingrese el numero de secciones de la biblioteca: ";
                 cin >> numsecciones;
             } // Fin While Validacion  
-            Biblioteca biblioteca(nombre, ubicacion, numpisos, numestantes, numsecciones);
-            bibliotecas.push_back(biblioteca);
+            bibliotecas.push_back(new Biblioteca(nombre, ubicacion, numpisos, numestantes, numsecciones));
             cout << "Biblioteca creada con existo!" << endl;
             break; }
         case 2: {
@@ -67,30 +66,42 @@ int main() {
             // Imprimir Bibliotecas
             cout << "Bibliotecas: " << endl;
             for (int i = 0; i < bibliotecas.size(); i++) {
-                cout << i << ". " << bibliotecas[i].getNombre() << endl;
+                cout << i << ". " << bibliotecas[i]->getNombre() << endl;
             } // Fin For   
             int pos = 0;
             cout << "Ingrese la posicion de la biblioteca a la que desea agregar un libro: ";
             cin >> pos;
             // Agregar Libro a una Biblioteca
             while (pos > bibliotecas.size() - 1 || pos < 0) {
-                cout << "La posicion ingresada no es valida!";
+                cout << "La posicion ingresada no es valida!" << endl;
                 cout << "Ingrese la posicion de la biblioteca a la que desea agregar un libro: ";
                 cin >> pos;
             } // Fin While Validacion   
             int numpiso;
             cout << "Ingrese el numero de piso: ";
             cin >> numpiso;
-
+            while (numpiso > bibliotecas[pos]->getPisos() - 1 || numpiso < 0) {
+                cout << "El numero ingresado no es valida!" << endl;
+                cout << "Ingrese el numero de piso: ";
+                cin >> numpiso;
+            } // Fin While Validacion
             int numestante;
             cout << "Ingrese el numero de estante: ";
             cin >> numestante;
-
+            while (numestante > bibliotecas[pos]->getEstantes() - 1 || numestante < 0) {
+                cout << "El numero ingresado no es valida!" << endl;
+                cout << "Ingrese el numero de estante: ";
+                cin >> numestante;
+            } // Fin While Validacion
             int numseccion;
             cout << "Ingrese el numero de seccion: ";
             cin >> numseccion;
-
-            bibliotecas[pos].agregarLibro(nombre, autor, ano, numpiso, numestante, numseccion);
+            while (numseccion > bibliotecas[pos]->getSecciones() - 1 || numseccion < 0) {
+                cout << "El numero ingresado no es valida!" << endl;
+                cout << "Ingrese el numero de seccion: ";
+                cin >> numseccion;
+            } // Fin While Validacion
+            bibliotecas[pos]->agregarLibro(nombre, autor, ano, numpiso, numestante, numseccion);
             cout << "Libro agregado con existo!" << endl;
             break; }
         case 3: {
@@ -98,36 +109,59 @@ int main() {
             cout << "Ingrese el titulo a buscar: ";
             getline(cin, titulo);
             getline(cin, titulo);
-
+            for (int i = 0; i < bibliotecas.size(); i++) {
+                bibliotecas[i]->buscarLibroTitulo(titulo);
+            } // Fin For
             break; }
         case 4: {
-            string titulo = "";
-            cout << "Ingrese el titulo a buscar: ";
-            getline(cin, titulo);
-            getline(cin, titulo);
-
+            string autor = "";
+            cout << "Ingrese el autor a buscar: ";
+            getline(cin, autor);
+            getline(cin, autor);
+            for (int i = 0; i < bibliotecas.size(); i++) {
+                bibliotecas[i]->buscarLibroAutor(autor);
+            } // Fin For
             break; }
         case 5: {
             // Imprimir Bibliotecas
             cout << "Bibliotecas: " << endl;
             for (int i = 0; i < bibliotecas.size(); i++) {
-                cout << i << ". " << bibliotecas[i].getNombre() << endl;
+                cout << i << ". " << bibliotecas[i]->getNombre() << endl;
             } // Fin For  
             int pos = 0;
-            cout << "Ingrese la posicion de la biblioteca que desea explorar: ";
+            cout << "Ingrese la posicion de la biblioteca a explorar: ";
             cin >> pos;
+            // Explorar una Biblioteca
+            while (pos > bibliotecas.size() - 1 || pos < 0) {
+                cout << "La posicion ingresada no es valida!" << endl;
+                cout << "Ingrese la posicion de la biblioteca a explorar: ";
+                cin >> pos;
+            } // Fin While Validacion   
             int numpiso;
             cout << "Ingrese el numero de piso: ";
             cin >> numpiso;
-
+            while (numpiso > bibliotecas[pos]->getPisos() - 1 || numpiso < 0) {
+                cout << "El numero ingresado no es valida!" << endl;
+                cout << "Ingrese el numero de piso: ";
+                cin >> numpiso;
+            } // Fin While Validacion
             int numestante;
             cout << "Ingrese el numero de estante: ";
             cin >> numestante;
-
+            while (numestante > bibliotecas[pos]->getEstantes() - 1 || numestante < 0) {
+                cout << "El numero ingresado no es valida!" << endl;
+                cout << "Ingrese el numero de estante: ";
+                cin >> numestante;
+            } // Fin While Validacion
             int numseccion;
             cout << "Ingrese el numero de seccion: ";
             cin >> numseccion;
-            //bibliotecas[pos].BuscarLibros(numpiso, numestante, numseccion).toString;
+            while (numseccion > bibliotecas[pos]->getSecciones() - 1 || numseccion < 0) {
+                cout << "El numero ingresado no es valida!" << endl;
+                cout << "Ingrese el numero de seccion: ";
+                cin >> numseccion;
+            } // Fin While Validacion
+
             break; }
         case 6: {
             // Aqui va la Salida
