@@ -57,6 +57,7 @@ public:
                     vector<Libro*> libros = bibliotecas[i][j][k]->getLibro();
                     for (int l = 0; l < libros.size(); l++) {
                         if (libros[l]->getTitulo() == titulo_l) {
+                            cout << endl;
                             cout << "Titulo: " << libros[l]->getTitulo() << endl;
                             cout << "Autor: " << libros[l]->getAutor() << endl;
                             cout << "Ano: " << libros[l]->getAno() << endl;
@@ -81,6 +82,7 @@ public:
                     vector<Libro*> libros = bibliotecas[i][j][k]->getLibro();
                     for (int l = 0; l < libros.size(); l++) {
                         if (libros[l]->getAutor() == autor_l) {
+                            cout << endl;
                             cout << "Titulo: " << libros[l]->getTitulo() << endl;
                             cout << "Autor: " << libros[l]->getAutor() << endl;
                             cout << "Ano: " << libros[l]->getAno() << endl;
@@ -97,6 +99,23 @@ public:
             cout << "No se ha encontrado ningun libro escrito por este autor" << endl;
         } // Fin If
     } // Fin Buscar Libro Autor
+    void explorarBiblioteca(int npiso, int nestante, int nseccion) {
+        bool valid = false;
+        vector<Libro*> libros = bibliotecas[npiso][nestante][nseccion]->getLibro();
+        for (int l = 0; l < libros.size(); l++) {
+            cout << endl;
+            cout << "Titulo: " << libros[l]->getTitulo() << endl;
+            cout << "Autor: " << libros[l]->getAutor() << endl;
+            cout << "Ano: " << libros[l]->getAno() << endl;
+            cout << "Biblioteca: " << nombre << endl;
+            cout << "Ubicado en el piso " << npiso << " del estante " << nestante << " de la seccion " << nseccion << endl;
+            cout << endl;
+            valid = true;
+        } // Fin For
+        if (valid == false) {
+            cout << "No se ha encontrado ningun libro en el piso " << npiso << ", estante " << nestante << " y seccion " << nseccion << endl;
+        } // Fin If
+    } // Fin Explorar Biblioteca 
     ~Biblioteca() {
         for (int i = 0; i < pisos; i++) {
             for (int j = 0; j < estantes; j++) {
